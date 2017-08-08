@@ -7,7 +7,7 @@ Socket.tcp_server_loop(4481) do |connection|
     while data = connection.readpartial(one_hundred_kb) do
       puts data
     end
-  rescue => EOFError
+  rescue EOFError
   end
   connection.close
 end
