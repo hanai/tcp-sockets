@@ -1,5 +1,7 @@
 require 'socket'
 
+SIZE_OF_INT = [11].pack('i').size
+
 module CloudHash
   class Server
     def initialize(port)
@@ -17,10 +19,13 @@ module CloudHash
     end
 
     def handle(connection)
-      request = connection.read
-
-      # 将 hash 操作写回
-      connection.write process(request)
+      loop do
+        packed_msg_length = connection.read(SIZE_OF_INT)
+        break if packed_msg_length == nil
+        msg_length = packed_msg_length.unpack('i').first
+        request = connection.read(msg_length)
+        connection.write process(request)
+      end
     end
 
     def process(request)
