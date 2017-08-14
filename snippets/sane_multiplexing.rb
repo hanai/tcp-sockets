@@ -1,4 +1,8 @@
-connections = [<TCPSocket>, <TCPSocket>, <TCPSocket>]
+connections = [
+  TCPSocket.new('localhost', 4481),
+  TCPSocket.new('localhost', 4481),
+  TCPSocket.new('localhost', 4481)
+]
 
 loop do
   # 查询 select(2) 哪一个连接可以进行读取

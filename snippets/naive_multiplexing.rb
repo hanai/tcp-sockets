@@ -1,4 +1,8 @@
-connections = [<TCPSocket>, <TCPSocket>, <TCPSocket>]
+connections = [
+  TCPSocket.new('localhost', 4481),
+  TCPSocket.new('localhost', 4481),
+  TCPSocket.new('localhost', 4481)
+]
 
 loop do
   connections.each do |conn|
